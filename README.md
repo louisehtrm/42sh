@@ -1,32 +1,20 @@
+# 42sh
+
+EPITA project : the goal is to create a fully functional shell
+
+ -  parse the command
+ -  manage builtins
+ -  manage if/else, while, until, for commands
+ -  manage commands such as pipeline, redirection, ...
+ -  manage operators
+
+Project realized with 3 classmates
+
 # Building
 
 ```sh
 meson setup builddir
-meson compile -C builddir  # or ninja -C builddir
+ninja -C builddir
 builddir/42sh
 ```
 
-# Debugging
-
-```
-gdb -arg builddir/42sh -c 'echo test'
-```
-
-# Running tests
-
-```sh
-tests/run_tests builddir/42sh
-```
-
-# Building documentation
-
-```sh
-# enable documentation support
-meson setup -Ddoc=true builddir  # --reconfigure might be needed
-# build the documentation
-meson compile -C builddir doxygen_doc
-# open the documentation in the browser
-xdg-open builddir/doxygen_doc/index.html
-```
-
-# 42sh
