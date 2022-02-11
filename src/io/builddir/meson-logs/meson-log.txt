@@ -1,0 +1,11 @@
+Build started at 2021-12-13T21:09:24.491019
+Main binary: /usr/bin/python3
+Build Options: 
+Python system: Linux
+The Meson build system
+Version: 0.53.2
+Source dir: /root/vm_ubuntu/download/src/io
+Build dir: /root/vm_ubuntu/download/src/io/builddir
+Build type: native build
+
+ERROR: First statement must be a call to project

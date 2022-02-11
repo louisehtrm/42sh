@@ -1,0 +1,759 @@
+#!/bin/sh
+
+if [ ! -e "42sh" ]; then
+    echo "42sh: No such file or directory"
+    exit 1
+else
+    echo Test 1 :
+    ./42sh -c "echo yes; if true; then true; else false; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (echo yes; if true; then true; else false; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE ---
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 2 :
+    ./42sh -c "echo test redirection > file1.txt" | tr ' ' '\n' > file1
+    val1=$?
+    (echo test redirection > file2.txt) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 1 ok"
+        echo ""
+    else
+        echo "Test 1 failed"
+        echo ""
+    fi
+    diff -u file1.txt file2.txt
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 2 ok"
+        echo ""
+    else
+        echo "Test 2 failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 3 :
+    ./42sh -c "if if true; then true; else false; fi; then echo true; else echo false; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (if if true; then true; else false; fi; then echo true; else echo false; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 4 :
+    ./42sh -c "if true; then if true; then echo true; else echo false; fi; else echo second; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (if true; then if true; then echo true; else echo false; fi; else echo second; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 5 :
+    ./42sh -c "if true; then if false; then echo true; else echo false; fi; else echo second; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (if true; then if false; then echo true; else echo false; fi; else echo second; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 6 :
+    ./42sh -c "echo test" | tr ' ' '\n' > file1
+    val1=$?
+    (echo test) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 7 :
+    ./42sh -c "echo test;" | tr ' ' '\n' > file1
+    val1=$?
+    (echo test;) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 8 :
+    ./42sh -c "echo yes; if true; then true; else false; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (echo yes; if true; then true; else false; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 9 :
+    ./42sh -c "echo yes; if true; then true; else false; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (echo yes; if true; then true; else false; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 10 :
+    ./42sh -c "echo test redirection 2> file1.txt" | tr ' ' '\n' > file1
+    val1=$?
+    (echo test redirection 2> file2.txt) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 1 ok"
+        echo ""
+    else
+        echo "Test 1 failed"
+        echo ""
+    fi
+    diff -u file1.txt file2.txt
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 2 ok"
+        echo ""
+    else
+        echo "Test 2 failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 11 :
+    ./42sh -c "echo test redirection > file1.txt" | tr ' ' '\n' > file1
+    val1=$?
+    (echo test redirection > file2.txt) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 1 ok"
+        echo ""
+    else
+        echo "Test 1 failed"
+        echo ""
+    fi
+    diff -u file1.txt file2.txt
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 2 ok"
+        echo ""
+    else
+        echo "Test 2 failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 12 :
+    ./42sh -c "cat < file1.txt" | tr ' ' '\n' > file1
+    val1=$?
+    (cat < file1.txt) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 1 ok"
+        echo ""
+    else
+        echo "Test 1 failed"
+        echo ""
+    fi
+    diff -u file1.txt file2.txt
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 2 ok"
+        echo ""
+    else
+        echo "Test 2 failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 13 :
+    ./42sh -c "echo test redirection > file1.txt 2>&1" | tr ' ' '\n' > file1
+    val1=$?
+    (echo test redirection > file2.txt 2>&1) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 1 ok"
+        echo ""
+    else
+        echo "Test 1 failed"
+        echo ""
+    fi
+    diff -u file1.txt file2.txt
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert 2 ok"
+        echo ""
+    else
+        echo "Test 2 failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 14 :
+    ./42sh -c "echo wesh la zone" | tr ' ' '\n' > file1
+    val1=$?
+    (echo wesh la zone) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 15 :
+    ./42sh -c "echo coucou les loulou; echo bonsoir;" | tr ' ' '\n' > file1
+    val1=$?
+    (echo coucou les loulou; echo bonsoir;) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 16 :
+    ./42sh -c "if true; then echo alright; else echo no; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (if true; then echo alright; else echo no; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 17 :
+    ./42sh -c "if true; then echo no; else echo yes; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (if true; then echo no; else echo yes; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 18 :
+    ./42sh -c "if false; then echo not printed; else echo guten tag; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (if false; then echo not printed; else echo guten tag; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 19 :
+    ./42sh -c "echo Bonsoir les amigos | tr o Z" | tr ' ' '\n' > file1
+    val1=$?
+    (echo Bonsoir les amigos | tr o Z) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 20 :
+    ./42sh -c "echo Bonsoir les amigos && echo echo" | tr ' ' '\n' > file1
+    val1=$?
+    (echo Bonsoir les amigos && echo echo) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 21 :
+    ./42sh -c "echo fi do done else && echo" | tr ' ' '\n' > file1
+    val1=$?
+    (echo fi do done else && echo) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 22 :
+    ./42sh -c "echo fi do || echo no; if true; then echo true; else echo false; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (echo fi do || echo no; if true; then echo true; else echo false; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 23 :
+    ./42sh -c "echo '\\\\\\\\\\n'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo '\\\\\\\\\\n') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 24 :
+    ./42sh -c "echo -n '\\\\\\\\\\n'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo -n '\\\\\\\\\\n') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 29 : #NOT WORKING
+    ./42sh -c "echo -e \\\\\\\\\\n" | tr ' ' '\n' > file1
+    val1=$?
+    (echo -e \\\\\\\\\\n) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 30 :
+    ./42sh -c "echo -n -e \\\\\\\\\\n" | tr ' ' '\n' > file1
+    val1=$?
+    (echo -n -e \\\\\\\\\\n) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 31 :
+    ./42sh -c "if true; then true; else false; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (if true; then true; else false; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 32 :
+    ./42sh -c "if true; then true else false; fi" | tr ' ' '\n' > file1
+    val1=$?
+    (if true; then true else false; fi) | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 33 :
+    ./42sh -c "echo 'lou'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo 'lou') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 34 :
+    ./42sh -c "echo 'lou\'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo 'lou\') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 35 :
+    ./42sh -c "echo lou\'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo lou\') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 34 :
+    ./42sh -c "echo -n 'lou\'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo -n 'lou\') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 35 :
+    ./42sh -c "echo -n lou\'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo -n lou\') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 34 :
+    ./42sh -c "echo -e 'lou\'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo -e 'lou\') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 35 :
+    ./42sh -c "echo -e lou\'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo -e lou\') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 34 :
+    ./42sh -c "echo -e -n 'lou\'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo -e -n 'lou\') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    echo Test 35 :
+    ./42sh -c "echo -e -n lou\'" | tr ' ' '\n' > file1
+    val1=$?
+    (echo -e -n lou\') | tr ' ' '\n' > file2
+    val2=$?
+    diff -u file1 file2
+    res=$?
+    if [ $res -eq 0 ]; then
+        echo "Assert ok"
+        echo ""
+    else
+        echo "Test failed"
+        echo ""
+    fi
+    if [ $val1 -ne $val2 ]; then
+        echo --- ERROR RETURN VALUE --- 
+        echo expected $val2 but got $val1
+    fi
+
+    rm file1
+    rm file2
+    rm file1.txt
+    rm file2.txt
+fi
