@@ -8,7 +8,7 @@ EPITA project : the goal is to create a fully functional shell
  -  manage commands such as pipeline, redirection, ...
  -  manage operators
 
-Project realized with 3 classmates
+Project realized with 2 classmates
 
 # Building
 
