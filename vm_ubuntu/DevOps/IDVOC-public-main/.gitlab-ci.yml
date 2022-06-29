@@ -1,0 +1,36 @@
+stages:
+  - lint
+  - display-lint
+
+worker-job:
+  stage: lint
+  image: registry.gitlab.com/pipeline-components/pylint:latest
+  script:
+    - pylint --exit-zero --load-plugins=pylint_gitlab --output-format=gitlab-codeclimate ./worker/*.py >> codeclimate.json
+  artifacts:
+    paths:
+      - codeclimate.json
+    reports:
+      codequality: codeclimate.json
+    when: always
+
+
+web-job:
+  stage: lint
+  image: registry.gitlab.com/pipeline-components/pylint:latest
+  script:
+    - pylint --exit-zero --load-plugins=pylint_gitlab --output-format=gitlab-codeclimate ./web/*.py >> codeclimate.json
+  artifacts:
+    paths:
+      - codeclimate.json
+    reports:
+      codequality: codeclimate.json
+    when: always
+
+display-lint-job:
+  stage: display-lint
+  depedencies:
+      - worker-job
+      - web-job
+  script:
+    - echo codeclimate.json
